@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Martin Kimathi — Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
+  <!-- EmailJS-->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="main.js" defer></script>
 </head>
 <body>
 
@@ -123,41 +126,35 @@
     </div>
   </section>
 
-  <!-- ── SERVICES ── -->
-  <section class="services-section" id="services">
-    <div class="section-inner">
-      <p class="section-label">What I offer</p>
-      <h2 class="section-title">My services</h2>
-      <p class="section-desc">From concept to launch, I deliver end-to-end digital solutions tailored to your needs.</p>
-      <div class="services-grid">
+  <!-- SERVICES — loads from Firebase -->
+<h1 id="services" style="margin-top: 60px; 
+    text-decoration: underline; 
+    text-decoration-color:#0004f0; 
+    text-align: center;">
+    My Services
+</h1>
 
-        <div class="service-card anim">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          </div>
-          <h3>Web Development</h3>
-          <p>I build responsive and interactive websites that provide seamless user experiences, optimized for performance across all devices and screen sizes.</p>
-        </div>
+<!-- Cards appear here automatically from Firebase -->
+<div id="services-container" 
+     style="display: flex;
+            flex-direction: row;
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-items: flex-start;
+            gap: 30px; 
+            padding: 40px 20px;">
 
-        <div class="service-card anim">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          </div>
-          <h3>UI/UX Design</h3>
-          <p>I design intuitive and engaging user interfaces, ensuring an optimal user journey and aesthetic consistency across web and mobile applications.</p>
-        </div>
+    <!-- Loading message shown while Firebase fetches data -->
+    <p id="loading-msg" 
+       style="color: #068585; 
+              font-size: 18px; 
+              text-align: center; 
+              width: 100%;">
+        Loading services...
+    </p>
 
-        <div class="service-card anim">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          </div>
-          <h3>App Design</h3>
-          <p>I create visually appealing and user-friendly mobile apps focused on enhancing functionality and delivering an excellent user experience.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
+</div>
+ 
 
   <!-- ── MODERN APP SECTION ── -->
   <section class="app-section">
@@ -177,8 +174,231 @@
     </div>
   </section>
 
-  <!-- ── FOOTER / CONTACT ── -->
-  <footer id="contact">
+  <!-- ── PROJECTS SECTION ── -->
+<div id="projects-section"
+     style="background-color: rgb(219, 235, 219);
+            padding: 60px 20px;
+            overflow: hidden;">
+
+  <!-- Section Heading -->
+  <h1 id="projects"
+      class="zoom-img"
+      style="text-decoration: underline;
+             text-decoration-color: #0004f0;
+             text-align: center;
+             margin-bottom: 10px;">
+    My Projects
+  </h1>
+
+  <p style="text-align: center;
+            color: #068585;
+            font-size: 16px;
+            margin-bottom: 40px;">
+    A selection of projects I have built and designed.
+  </p>
+
+  <!-- Slider  -->
+  <div id="projects-slider-wrapper"
+       style="position: relative;
+              width: 100%;
+              overflow: hidden;
+              min-height: 380px;">
+
+    <!-- Slide 1 — first 3 projects -->
+    <div id="slide-1"
+         class="projects-slide"
+         style="display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: stretch;
+                gap: 60px;
+                flex-wrap: nowrap;
+                position: absolute;
+                width: 100%;
+                top: 0;
+                left: 0;
+                transition: transform 0.8s ease, opacity 0.8s ease;
+                transform: translateX(0%);
+                opacity: 1;">
+    </div>
+
+    <!-- Slide 2 — last 3 projects -->
+    <div id="slide-2"
+         class="projects-slide"
+         style="display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: stretch;
+                gap: 60px;
+                flex-wrap: nowrap;
+                position: absolute;
+                width: 100%;
+                top: 0;
+                left: 0;
+                transition: transform 0.8s ease, opacity 0.8s ease;
+                transform: translateX(100%);
+                opacity: 0;">
+    </div>
+
+  </div>
+
+  <!-- Dot indicators -->
+  <div style="display: flex;
+              justify-content: center;
+              gap: 10px;
+              margin-top: 30px;">
+    <div id="dot-1"
+         style="width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #0004f0;
+                cursor: pointer;
+                transition: background 0.3s;">
+    </div>
+    <div id="dot-2"
+         style="width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #ccc;
+                cursor: pointer;
+                transition: background 0.3s;">
+    </div>
+  </div>
+
+</div>
+
+  <footer>
+    <!-- ── CONTACT FORM SECTION ── -->
+<div id="contact" 
+     style="background-color: var(--footer-bg);
+            padding: 60px 20px;
+            text-align: center;">
+
+  <h1 style="text-decoration: underline;
+             text-decoration-color: #0004f0;
+             margin-bottom: 10px;">
+    Contact Me
+  </h1>
+
+  <p style="color: #068585; 
+            font-size: 16px;
+            margin-bottom: 40px;">
+    Have a project in mind? Send me a message and I'll get back to you.
+  </p>
+
+  <!-- Form -->
+  <form id="contact-form"
+        style="max-width: 550px;
+               margin: 0 auto;
+               background: white;
+               padding: 40px;
+               border-radius: 16px;
+               box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+               text-align: left;">
+
+    <!-- Name -->
+    <div style="margin-bottom: 20px;">
+      <label style="display: block;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                    margin-bottom: 8px;">
+        Your Name
+      </label>
+      <input type="text" 
+             name="from_name" 
+             id="from_name"
+             placeholder="e.g. John Kamau"
+             required
+             style="width: 100%;
+                    padding: 12px 16px;
+                    border: 1.5px solid #d8d4c8;
+                    border-radius: 8px;
+                    font-size: 0.95rem;
+                    outline: none;
+                    transition: border-color 0.3s;
+                    font-family: Arial, sans-serif;">
+    </div>
+
+    <!-- Email -->
+    <div style="margin-bottom: 20px;">
+      <label style="display: block;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                    margin-bottom: 8px;">
+        Your Email
+      </label>
+      <input type="email" 
+             name="from_email" 
+             id="from_email"
+             placeholder="e.g. john@gmail.com"
+             required
+             style="width: 100%;
+                    padding: 12px 16px;
+                    border: 1.5px solid #d8d4c8;
+                    border-radius: 8px;
+                    font-size: 0.95rem;
+                    outline: none;
+                    transition: border-color 0.3s;
+                    font-family: Arial, sans-serif;">
+    </div>
+
+    <!-- Message -->
+    <div style="margin-bottom: 28px;">
+      <label style="display: block;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                    margin-bottom: 8px;">
+        Your Message
+      </label>
+      <textarea name="message" 
+                id="message"
+                placeholder="Tell me about your project..."
+                required
+                rows="5"
+                style="width: 100%;
+                       padding: 12px 16px;
+                       border: 1.5px solid #d8d4c8;
+                       border-radius: 8px;
+                       font-size: 0.95rem;
+                       outline: none;
+                       resize: vertical;
+                       transition: border-color 0.3s;
+                       font-family: Arial, sans-serif;">
+      </textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" 
+            id="submit-btn"
+            style="width: 100%;
+                   padding: 14px;
+                   background: #0004f0;
+                   color: white;
+                   border: none;
+                   border-radius: 8px;
+                   font-size: 1rem;
+                   font-weight: 600;
+                   cursor: pointer;
+                   transition: background 0.3s, transform 0.2s;
+                   font-family: Arial, sans-serif;">
+      Send Message
+    </button>
+
+    <!-- Status message -->
+    <p id="form-status"
+       style="text-align: center;
+              margin-top: 16px;
+              font-size: 0.95rem;
+              min-height: 24px;">
+    </p>
+
+  </form>
+
+</div>
+</div>
     <div class="footer-inner">
       <div class="footer-grid">
 
@@ -224,79 +444,7 @@
       </div>
     </div>
   </footer>
-
-  <!-- ── JAVASCRIPT ── -->
-  <script>
-    /* Typing effect */
-    const words = ["Frontend Developer", "Backend Developer", "Graphics Designing", "Video Editting", "Freelancing"];
-    let wordIndex = 0, charIndex = 0, isDeleting = false;
-    const typingEl = document.getElementById("typing");
-
-    function typeEffect() {
-      const currentWord = words[wordIndex];
-      if (isDeleting) { charIndex--; } else { charIndex++; }
-      typingEl.textContent = currentWord.substring(0, charIndex);
-      let speed = isDeleting ? 50 : 100;
-      if (!isDeleting && charIndex === currentWord.length) {
-        speed = 1500; isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        speed = 500;
-      }
-      setTimeout(typeEffect, speed);
-    }
-    typeEffect();
-
-    /* Navbar scroll effect */
-    window.addEventListener("scroll", function () {
-      const navbar = document.getElementById("navbar");
-      navbar.classList.toggle("scrolled", window.scrollY > 60);
-    });
-
-    /* Hamburger menu */
-    const hamburger = document.getElementById("hamburger");
-    const mobileMenu = document.getElementById("mobileMenu");
-
-    hamburger.addEventListener("click", function () {
-      hamburger.classList.toggle("open");
-      mobileMenu.classList.toggle("open");
-    });
-
-    function closeMenu() {
-      hamburger.classList.remove("open");
-      mobileMenu.classList.remove("open");
-    }
-
-    /* Intersection observer — fade-in + skill bars */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-
-          /* Animate progress bars when visible */
-          if (entry.target.classList.contains("skill-item")) {
-            const bar = entry.target.querySelector(".progress-bar");
-            if (bar) {
-              const targetWidth = bar.getAttribute("data-width");
-              setTimeout(() => { bar.style.width = targetWidth; }, 200);
-            }
-          }
-        } else {
-          entry.target.classList.remove("show");
-          /* Reset progress bar */
-          if (entry.target.classList.contains("skill-item")) {
-            const bar = entry.target.querySelector(".progress-bar");
-            if (bar) bar.style.width = "0";
-          }
-        }
-      });
-    }, { threshold: 0.25 });
-
-    document.querySelectorAll(".anim, .zoom-img, .skill-item").forEach(el => {
-      observer.observe(el);
-    });
-  </script>
-
+ <!-- Firebase SDK -->
+<script type="module" src="firebase.js"></script>
 </body>
 </html>
