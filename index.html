@@ -4,12 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Martin Kimathi — Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="styles.css" />
   <!-- EmailJS-->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="main.js" defer></script>
 </head>
 <body>
+<!-- ── PAGE LOADER ── -->
+<div id="page-loader"
+     style="position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;">
+
+  <!-- Spinning circle -->
+  <div style="width: 55px;
+              height: 55px;
+              border: 5px solid #e0e0e0;
+              border-top: 5px solid #555555;
+              border-radius: 50%;
+              animation: spin 0.9s linear infinite;">
+  </div>
+
+  <!-- Loading text -->
+  <p style="margin-top: 16px;
+            font-family: Arial, sans-serif;
+            font-size: 0.88rem;
+            color: #aaaaaa;
+            letter-spacing: 0.08em;">
+    Loading...
+  </p>
+
+</div>
 
   <!-- ── NAVBAR ── -->
   <nav class="topnav" id="navbar">
