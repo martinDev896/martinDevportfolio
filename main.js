@@ -15,6 +15,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
+// ── DARK / LIGHT MODE TOGGLE ──
+const themeToggle = document.getElementById("theme-toggle");
+
+// Check saved preference from last visit
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+  themeToggle.textContent = "☀️";
+} else {
+  document.body.classList.remove("dark-mode");
+  themeToggle.textContent = "🌙";
+}
+
+// Toggle on click
+themeToggle.addEventListener("click", function() {
+  document.body.classList.toggle("dark-mode");
+
+  // Update icon
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
+});
+
     /* typing effect*/
     const words = ["Frontend Developer", "Backend Developer", "Graphics Designing", "Video Editting", "Freelancing"];
     let wordIndex = 0, charIndex = 0, isDeleting = false;
