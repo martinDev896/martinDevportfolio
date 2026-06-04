@@ -784,3 +784,163 @@ footer {
   animation: fadeOut 0.5s ease forwards;
   pointer-events: none;
 }
+
+/* ── DARK MODE ── */
+
+/* Dark mode variables */
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+/* Navbar dark */
+body.dark-mode .topnav {
+  background: rgba(18, 18, 18, 0.95);
+  border-bottom: 1px solid #333;
+}
+
+body.dark-mode .logo {
+  color: #f0f0f0;
+}
+
+body.dark-mode .nav-links a {
+  color: #aaaaaa;
+}
+
+body.dark-mode .nav-links a:hover {
+  color: #ffffff;
+  background: #2a2a2a;
+}
+
+/* Hero dark */
+body.dark-mode .hero-section {
+  background: #121212;
+}
+
+body.dark-mode .hero-text h1 {
+  color: #f0f0f0;
+}
+
+body.dark-mode .hero-text p {
+  color: #aaaaaa;
+}
+
+/* About dark */
+body.dark-mode .about-section {
+  background: #1a1a1a;
+}
+
+body.dark-mode .about-content p {
+  color: #aaaaaa;
+}
+
+/* Skills dark */
+body.dark-mode .skills-section {
+  background: #111111;
+}
+
+body.dark-mode .skill-item {
+  background: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark-mode .skill-name {
+  color: #f0f0f0;
+}
+
+/* Services dark */
+body.dark-mode .services-section {
+  background: #1a1a1a;
+}
+
+body.dark-mode .service-card {
+  background: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark-mode .service-card h3 {
+  color: #f0f0f0;
+}
+
+body.dark-mode .service-card p {
+  color: #aaaaaa;
+}
+
+/* Projects dark */
+body.dark-mode #projects-section {
+  background: #111111;
+}
+
+body.dark-mode .project-card {
+  background: #1e1e1e;
+}
+
+body.dark-mode .project-info h3 {
+  color: #7a9cff;
+}
+
+body.dark-mode .project-info p {
+  color: #aaaaaa;
+}
+
+/* Contact form dark */
+body.dark-mode #contact {
+  background: #1a1a1a;
+}
+
+body.dark-mode #contact-form {
+  background: #1e1e1e;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+body.dark-mode #contact-form label {
+  color: #f0f0f0;
+}
+
+body.dark-mode #contact-form input,
+body.dark-mode #contact-form textarea {
+  background: #2a2a2a;
+                border-color: #444;
+  color: #f0f0f0;
+}
+
+body.dark-mode #contact-form input::placeholder,
+body.dark-mode #contact-form textarea::placeholder {
+  color: #777;
+}
+
+/* Footer dark */
+body.dark-mode footer {
+  background: #0a0a0a;
+}
+
+/* Section titles dark */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #f0f0f0;
+}
+
+body.dark-mode p {
+  color: #aaaaaa;
+}
+
+/* Toggle button dark */
+body.dark-mode #theme-toggle {
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+/* Scrollbar dark */
+body.dark-mode::-webkit-scrollbar {
+  width: 8px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
