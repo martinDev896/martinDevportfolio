@@ -351,35 +351,75 @@ if (logoutBtn) {
   // =============================================
   // ── MESSAGES ──
   // =============================================
-  async function loadMessages() {
-    const list = document.getElementById("messages-list");
-    list.innerHTML = "<p class='loading-text'>Loading messages...</p>";
+async function loadMessages() {
+  const list = document.getElementById("messages-list");
+  list.innerHTML = "<p class='loading-text'>Loading messages...</p>";
 
-    try {
-      const snap = await getDocs(collection(db, "messages"));
+  try {
+    const snap = await getDocs(collection(db, "messages"));
 
-      if (snap.empty) {
-        list.innerHTML = "<p class='loading-text'>No messages yet.</p>";
-        return;
+    if (snap.empty) {
+      list.innerHTML = "<p class='loading-text'>No messages yet.</p>";
+      return;
+    }
+
+    list.innerHTML = "";
+
+    snap.forEach(function(docSnap) {
+      const m    = docSnap.data();
+      const card = document.createElement("div");
+      card.className = "message-card";
+
+      // Format date nicely
+      let dateStr = "";
+      if (m.date) {
+        const d = new Date(m.date);
+        dateStr = d.toLocaleDateString("en-KE", {
+          day:   "numeric",
+          month: "long",
+          year:  "numeric",
+          hour:  "2-digit",
+          minute:"2-digit"
+        });
       }
 
-      list.innerHTML = "";
+      card.innerHTML = `
+        <div style="display:flex;
+                    justify-content:space-between;
+                    align-items:flex-start;
+                    flex-wrap:wrap;
+                    gap:0.5rem;">
+          <div>
+            <h4>${m.name || m.from_name || "Unknown"}</h4>
+            <p class="message-email">
+              📧 ${m.email || m.from_email || "No email"}
+            </p>
+            ${dateStr ? `<p class="message-email">🕐 ${dateStr}</p>` : ""}
+          </div>
+          <button class="delete-btn"
+                  onclick="deleteMessage('${docSnap.id}')">
+            Delete
+          </button>
+        </div>
+        <p class="message-text" style="margin-top:10px;">
+          ${m.message}
+        </p>
+      `;
 
-      snap.forEach(function(docSnap) {
-        const m    = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "message-card";
-        card.innerHTML = `
-          <h4>${m.name || m.from_name}</h4>
-          <p class="message-email">${m.email || m.from_email}</p>
-          <p class="message-text">${m.message}</p>
-        `;
-        list.appendChild(card);
-      });
+      list.appendChild(card);
+    });
 
-    } catch (error) {
-      list.innerHTML = "<p class='loading-text'>Could not load messages.</p>";
-    }
+  } catch (error) {
+    list.innerHTML = "<p class='loading-text'>Could not load messages.</p>";
+    console.error("Messages error:", error);
   }
+}
 
+// Delete message
+window.deleteMessage = async function(id) {
+  if (confirm("Delete this message?")) {
+    await deleteDoc(doc(db, "messages", id));
+    loadMessages();
+  }
+};
 }
