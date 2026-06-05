@@ -2,7 +2,7 @@
   import { initializeApp } 
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
-  import { getFirestore, collection, getDocs, orderBy, query } 
+  import { getFirestore, collection, getDocs, addDoc, orderBy, query } 
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   // ── my Firebase config ──
@@ -286,3 +286,11 @@ function createProjectCard(project) {
 
   return card;
 }
+
+// ── Save message to Firestore ──
+async function saveMessage(data) {
+  await addDoc(collection(db, "messages"), data);
+}
+
+// Make it available to main.js
+window.saveMessage = saveMessage;
