@@ -1,3 +1,22 @@
+// ── Firebase imports for saving messages ──
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import { getFirestore, collection, addDoc }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  // ── my Firebase config ──
+  const firebaseConfig = {
+  apiKey: "AIzaSyBaxLJHGg6xXqumKQCnLGRw-_AeZoNTuDU",
+  authDomain: "martin-portfolio-100a0.firebaseapp.com",
+  projectId: "martin-portfolio-100a0",
+  storageBucket: "martin-portfolio-100a0.firebasestorage.app",
+  messagingSenderId: "247649897607",
+  appId: "1:247649897607:web:4689925f9e236f2f193c22"
+};
+  // ── Starting Firebase ──
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
 // ── PAGE LOADER ──
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -156,30 +175,45 @@ themeToggle.addEventListener("click", function() {
 
     // ──Send email via EmailJS ──
     emailjs.sendForm(
-      "service_bv0e61k",   // Replace with your real Service ID
-      "template_7gck639",  // Replace with your real Template ID
-      form
-    )
-    .then(function() {
-      // Success
-      formStatus.textContent   = "✅ Message sent! I'll get back to you soon.";
-      formStatus.style.color   = "green";
-      submitBtn.textContent    = "Send Message";
-      submitBtn.style.background = "#0004f0";
-      submitBtn.disabled       = false;
-      form.reset();
+  "service_bv0e61k",   // Replace with your real Service ID
+  "template_7gck639",  
 
-    }, function(error) {
-      // Failed
-      formStatus.textContent   = "❌ Failed to send. Please try again.";
-      formStatus.style.color   = "red";
-      submitBtn.textContent    = "Send Message";
-      submitBtn.style.background = "#0004f0";
-      submitBtn.disabled       = false;
-      console.error("EmailJS error:", error);
+  form
+)
+.then(async function() {
+
+  // Save directly to Firebase
+  try {
+    await addDoc(collection(db, "messages"), {
+      name:    name,
+      email:   email,
+      message: message,
+      date:    new Date().toISOString()
     });
+    console.log("✅ Message saved to Firebase!");
+  } catch (err) {
+    console.error("❌ Firebase save error:", err);
+  }
 
-  });
+  formStatus.textContent     = "✅ Message sent! I'll get back to you soon.";
+  formStatus.style.color     = "green";
+  submitBtn.textContent      = "Send Message";
+  submitBtn.style.background = "#0004f0";
+  submitBtn.disabled         = false;
+  form.reset();
+
+})
+
+}, function(error) {
+  formStatus.textContent     = "❌ Failed to send. Please try again.";
+  formStatus.style.color     = "red";
+  submitBtn.textContent      = "Send Message";
+  submitBtn.style.background = "#0004f0";
+  submitBtn.disabled         = false;
+  console.error("EmailJS error:", error);
+});
+
+  ;
 
   // ──Button hover effects ──
   submitBtn.addEventListener("mouseover", function() {
